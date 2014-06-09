@@ -1,4 +1,6 @@
 bit-ftp
 =======
-![](https://raw.githubusercontent.com/lekhmanrus/bit-ftp/master/assets/img/logo-big.png "")
+
+<img src="./assets/img/logo-big.png" width="300px" />
+
 BitFTP is user-friendly, easy configurable, open-source FTP Server for multiple platforms.
