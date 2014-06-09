@@ -1,0 +1,131 @@
+<div class="users-row">
+  <div class="list">
+    <button type="button" class="btn btn-lg btn-primary btn-user-add" ng-click="addUser()">
+      Add new user
+      <span class="glyphicon glyphicon-plus"></span>
+    </button>
+    <h4 class="page-header users-header">Users</h4>
+    <div class="panel panel-default" ng-if="users.length <= 0">
+      <div class="panel-body">
+        No users yet.
+      </div>
+    </div>
+    <ul class="list-group" ng-if="users.length > 0">
+      <li class="list-group-item pointer user-item" ng-repeat="user in users" ng-class="{'active': user.id == editUserId}" ng-click="getUser(user.id)">
+        <span class="glyphicon glyphicon-remove text-danger pull-right" ng-click="showModalRemoveUser(user.id); $event.stopPropagation()"></span>
+        {{ user.login }}
+      </li>
+    </ul>
+
+  </div>
+  <div class="configure">
+    <div ng-if="editUserId === undefined">
+      <h4 class="page-header users-header">Adding a user</h4>
+      <form role="form">
+
+        <div class="form-group" ac-boxfill>
+          <ul>
+            <li><input id="anonymous-r" ng-model="newUser.anonymous" type="checkbox" ng-click="setNewAnonymous()" /><label for="anonymous-r" class="hint--top hint--bounce" data-hint="Connections without login and password" ng-click="setNewAnonymous()">Allow anonymous connections</label></li>
+          </ul>
+        </div>
+
+        <div class="clearfix"></div>
+
+        <div class="form-group">
+          <label for="login">Login</label>
+          <input id="login" ng-model="newUser.login" ng-disabled="newUser.anonymous" type="text" class="form-control" placeholder="Input user login" required />
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <password-show ng-model="newUser.password" ng-disabled="newUser.anonymous"></password-show>
+        </div>
+
+        <div class="form-group">
+          <label for="startDirectory">Directory</label>
+          <directory-chooser ng-model="newUser.startDirectory"></directory-chooser>
+        </div>
+
+        <div class="form-group">
+          <label for="maxNumberOfClients">Max number of clients</label>
+          <input id="maxNumberOfClients" ng-model="newUser.maxNumberOfClients" type="number" class="form-control" placeholder="Input max number of clients" uint />
+          <p class="help-block pull-right">0 - is unlimited</p>
+        </div>
+
+        <div class="form-group" ac-boxfill>
+          <label for="privileges">Privileges</label>
+          <ul>
+            <li><input id="privileges-r" ng-model="newUser.privileges.r" type="checkbox" /><label for="privileges-r" class="hint--top hint--bounce" data-hint="READ FILE">R</label></li>
+            <li><input id="privileges-w" ng-model="newUser.privileges.w" type="checkbox" /><label for="privileges-w" class="hint--top hint--bounce" data-hint="WRITE FILE">W</label></li>
+            <li><input id="privileges-l" ng-model="newUser.privileges.l" type="checkbox" /><label for="privileges-l" class="hint--top hint--bounce" data-hint="LIST">L</label></li>
+            <li><input id="privileges-d" ng-model="newUser.privileges.d" type="checkbox" /><label for="privileges-d" class="hint--top hint--bounce" data-hint="DELETE FILE">D</label></li>
+            <li><input id="privileges-c" ng-model="newUser.privileges.c" type="checkbox" /><label for="privileges-c" class="hint--top hint--bounce" data-hint="CREATE DIR">C</label></li>
+            <li><input id="privileges-x" ng-model="newUser.privileges.x" type="checkbox" /><label for="privileges-x" class="hint--top hint--bounce" data-hint="DELETE DIR">X</label></li>
+          </ul>
+        </div>
+
+        <div class="clearfix"></div>
+        <hr />
+
+        <button type="submit" class="btn btn-lg btn-default btn-block" ng-click="addUser()">
+          <span class="glyphicon glyphicon-plus"></span>
+          Add new user
+        </button>
+      </form>
+    </div>
+    <div ng-if="editUserId >= 0">
+      <h4 class="page-header users-header">Editing a user</h4>
+      <form role="form">
+
+        <div class="form-group" ac-boxfill>
+          <ul>
+            <li><input id="anonymous-r" ng-model="editingUser.anonymous" type="checkbox" ng-click="setEditingAnonymous()" /><label for="anonymous-r" class="hint--top hint--bounce" data-hint="Connections without login and password" ng-click="setEditingAnonymous()">Allow anonymous connections</label></li>
+          </ul>
+        </div>
+
+        <div class="clearfix"></div>
+
+        <div class="form-group">
+          <label for="login">Login</label>
+          <input id="login" ng-model="editingUser.login" ng-disabled="editingUser.anonymous" type="text" class="form-control" placeholder="Input user login" required />
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <password-show ng-model="editingUser.password" ng-disabled="editingUser.anonymous"></password-show>
+        </div>
+
+        <div class="form-group">
+          <label for="startDirectory">Directory</label>
+          <directory-chooser ng-model="editingUser.startDirectory"></directory-chooser>
+        </div>
+
+        <div class="form-group">
+          <label for="maxNumberOfClients">Max number of clients</label>
+          <input id="maxNumberOfClients" ng-model="editingUser.maxNumberOfClients" type="number" class="form-control" placeholder="Input max number of clients" uint />
+          <p class="help-block pull-right">0 - is unlimited</p>
+        </div>
+
+        <div class="form-group" ac-boxfill>
+          <label for="privileges">Privileges</label>
+          <ul>
+            <li><input id="privileges-r" ng-model="editingUser.privileges.r" type="checkbox" /><label for="privileges-r" class="hint--top hint--bounce" data-hint="READ FILE">R</label></li>
+            <li><input id="privileges-w" ng-model="editingUser.privileges.w" type="checkbox" /><label for="privileges-w" class="hint--top hint--bounce" data-hint="WRITE FILE">W</label></li>
+            <li><input id="privileges-l" ng-model="editingUser.privileges.l" type="checkbox" /><label for="privileges-l" class="hint--top hint--bounce" data-hint="LIST">L</label></li>
+            <li><input id="privileges-d" ng-model="editingUser.privileges.d" type="checkbox" /><label for="privileges-d" class="hint--top hint--bounce" data-hint="DELETE FILE">D</label></li>
+            <li><input id="privileges-c" ng-model="editingUser.privileges.c" type="checkbox" /><label for="privileges-c" class="hint--top hint--bounce" data-hint="CREATE DIR">C</label></li>
+            <li><input id="privileges-x" ng-model="editingUser.privileges.x" type="checkbox" /><label for="privileges-x" class="hint--top hint--bounce" data-hint="DELETE DIR">X</label></li>
+          </ul>
+        </div>
+
+        <div class="clearfix"></div>
+        <hr />
+
+        <button type="submit" class="btn btn-lg btn-default btn-block" ng-click="editUser()">
+          <span class="glyphicon glyphicon-edit"></span>
+          Edit
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

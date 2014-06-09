@@ -1,0 +1,30 @@
+<h4 class="page-header users-header">Log</h4>
+<div ng-if="entries.length > 0">
+  <div class="right-inner-addon">
+    <span class="glyphicon glyphicon-search"></span>
+    <input ng-model="searchText" type="search" class="form-control" placeholder="Search" />
+  </div>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Date</th>
+        <th>Event type</th>
+        <th>Message</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="entry in entries | filter:searchText">
+        <td ng-bind="entry.id"></td>
+        <td>{{ entry.date | date:'HH:mm:ss dd MMM yyyy' }}</td>
+        <td>
+          <span class="label" ng-class="{'label-primary': entry.type == 'Server event', 'label-warning': entry.type == 'User event', 'label-info': entry.type == 'Client event'}" ng-bind="entry.type"></span>
+        </td>
+        <td ng-bind="entry.message"></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div class="alert alert-info" ng-if="entries.length <= 0">
+  <strong>Note!</strong> Log is empty.
+</div>

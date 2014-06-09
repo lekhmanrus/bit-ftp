@@ -1,0 +1,39 @@
+{
+  "name": "",
+  "version": "0.0.1",
+  "description": "",
+  "dependencies": {
+
+  },
+  "devDependencies": {
+    "nodewebkit": "*",
+    "nw-gyp": "*",
+    "grunt": "*",
+    "grunt-cli": "*",
+    "grunt-contrib-watch": "*",
+    "npm": "*",
+    "async": "*",
+    "download": "*"
+  },
+  "repository": {
+
+  },
+  "window": {
+    "title": "BitFTP",
+    "icon": "assets/img/logo.png",
+
+    "frame": true,
+    "min_width": 900,
+    "min_height": 370,
+    "width": 900,
+    "height": 657,
+    "position": "center"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": ""
+  },
+  "homepage": "",
+  "main": "assets/index.html"
+}

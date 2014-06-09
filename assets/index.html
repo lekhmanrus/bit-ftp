@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="bitFTPApp" class="no-js">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>BitFTP</title>
+  <meta name="description" content="" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" type="text/css" href="css/normalize.css" />
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+  <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css" />
+  <link rel="stylesheet" type="text/css" href="css/hint.min.css" />
+  <link rel="stylesheet" type="text/css" href="css/angular-motion.min.css" />
+  <link rel="stylesheet" type="text/css" href="css/app.css" />
+</head>
+<body ng-controller="MainCtrl">
+  <menu class="left">
+    <li><span></span></li>
+    <li class="green" ng-class="{ 'disable': running }" ng-click="start()">
+      <a href="" ng-class="{ 'hint--right hint--bounce': !running }" ng-data-hint="{ 'Run (Ctrl+R / Enter / F5)' : !running }">
+        <span class="glyphicon glyphicon-play"></span>
+      </a>
+    </li>
+    <li class="red" ng-class="{ 'disable': !running }" ng-click="stop()">
+      <a href="" ng-class="{ 'hint--right hint--bounce': running }" ng-data-hint="{ 'Save (Ctrl+S / Space / F6)' : running }">
+        <span class="glyphicon glyphicon-stop"></span>
+      </a>
+    </li>
+    <li ng-class="{ 'active': page == '/log' }">
+      <a href="#/log" class="hint--right hint--bounce" data-hint="Log (Ctrl+L)">
+        <span class="glyphicon glyphicon-list-alt"></span>
+      </a>
+    </li>
+    <li ng-class="{ 'active': page == '/users' }">
+      <a href="#/users" class="hint--right hint--bounce" data-hint="Users (Ctrl+U)">
+        <span class="glyphicon glyphicon-user"></span>
+      </a>
+    </li>
+    <li ng-class="{ 'active': page == '/options' }">
+      <a href="#/options" class="hint--right hint--bounce" data-hint="Options (Ctrl+O)">
+        <span class="glyphicon glyphicon-cog"></span>
+      </a>
+    </li>
+    <li ng-click="showModalAbout()">
+      <a href="" class="hint--right hint--bounce" data-hint="About (Ctrl+A / F1)">
+        <span class="glyphicon glyphicon-info-sign"></span>
+      </a>
+    </li>
+  </menu>
+
+  <div ng-view></div>
+
+  <script type="text/javascript" src="lib/jquery-2.1.1.min.js"></script>
+  <script type="text/javascript" src="lib/angular/angular.min.js"></script>
+  <script type="text/javascript" src="lib/angular/angular-route.min.js"></script>
+  <script type="text/javascript" src="lib/angular-animate.min.js"></script>
+  <script type="text/javascript" src="lib/angular-strap.min.js"></script>
+  <script type="text/javascript" src="lib/angular-strap.tpl.min.js"></script>
+  <!-- <script type="text/javascript" src="lib/ui-bootstrap-tpls-0.11.0.min.js"></script> -->
+  <script type="text/javascript" src="js/app.js"></script>
+  <script type="text/javascript" src="js/services.js"></script>
+  <script type="text/javascript" src="js/controllers.js"></script>
+  <script type="text/javascript" src="js/filters.js"></script>
+  <script type="text/javascript" src="js/directives.js"></script>
+</body>
+</html>

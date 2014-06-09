@@ -1,0 +1,261 @@
+* {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  outline: 0px !important;
+}
+
+menu.left {
+  width: 63px;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  height: 100%;
+  list-style-type: none;
+  background: #f7f7f7;
+  z-index: 1;
+  padding: 0px;
+  margin: 0px;
+  box-shadow: 2px 0 18px rgba(0, 0, 0, 0.26);
+}
+
+menu.left li {
+  padding: 0px;
+  margin: 0px;
+  list-style: none;
+  left: 0px;
+  text-align: center;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+menu.left li:first-child span {
+  display: block;
+  background-image: url(../img/logo.png);
+  width: 57px;
+  height: 57px;
+  margin-left: 3px;
+}
+
+menu.left li:first-child {
+  background-color: rgb(85, 85, 85);
+  width: 63px;
+  height: 63px;
+}
+
+menu.left li a {
+  margin: 0px;
+  padding: 0px;
+  margin-bottom: -7px;
+  margin-left: -3px;
+  color: #555555;
+  font-size: 47px;
+  text-decoration: none;
+  width: 100%;
+  height: 100%;
+}
+
+menu.left li:not(:first-child):hover {
+  background: #428BCA;
+}
+
+menu.left li:not(:first-child):hover a {
+  color: #FFFFFF;
+}
+
+menu.left li.green a {
+  color: #5CB85C;
+}
+
+menu.left li.green:not(:first-child):hover {
+  background: #5CB85C;
+}
+
+menu.left li.red a {
+  color: #D9534F;
+}
+
+menu.left li.red:not(:first-child):hover {
+  background: #D9534F;
+}
+
+menu.left li.active {
+  border-right: 3px solid #428BCA;
+}
+
+menu.left li.disable a,
+menu.left li.disable:not(:first-child):hover a {
+  color: #CCCCCC;
+  cursor: default;
+}
+
+menu.left li.disable:not(:first-child):hover {
+  background: #F7F7F7;
+}
+
+div[ng-view] {
+  margin-left: 75px;
+  margin-right: 12px;
+}
+
+.users-row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.users-row .list {
+  flex-grow: 0;
+  flex-shrink: 0;
+  width: 180px;
+}
+
+.users-row .configure {
+  flex-grow: 1;
+  flex-shrink: 1;
+  padding-left: 12px;
+}
+
+.users-row .list ul.list-group {
+  max-height: calc(100% - 87px);
+  width: 180px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  position: absolute;
+  padding-right: 1px;
+}
+
+.users-header {
+  margin: 5px;
+  padding: 0px;
+}
+
+.btn-user-add {
+  margin: 5px;
+}
+
+.user-item.active {
+  color: #FFFFFF;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.modal {
+  overflow: auto;
+  text-shadow: none;
+  cursor: default;
+}
+
+.bootstrap-filestyle input[disabled] {
+  cursor: not-allowed;
+}
+
+div[ac-boxfill] input[type="checkbox"] {
+  display: inline-block;
+  width: 21px;
+  height: 21px;
+  opacity: 0;
+  -webkit-appearance: none;
+  vertical-align: middle;
+  margin-left: -21px;
+  margin-top: 0px;
+  cursor: pointer;
+}
+
+div[ac-boxfill] ul {
+  list-style: none;
+  padding-left: 0px;
+}
+
+div[ac-boxfill] li {
+  display: inline;
+  float: left;
+}
+
+div[ac-boxfill] li::before {
+  width: 21px;
+  height: 21px;
+  display: block;
+  cursor: pointer;
+  float: left;
+}
+
+div[ac-boxfill] li::before {
+  content: '';
+  border: 2px solid #CCCCCC;
+  -webkit-transition: opacity 0.3s;
+  transition: opacity 0.3s;
+  z-index: 2 !important;
+}
+
+div[ac-boxfill] label {
+  padding-left: 5px;
+  margin-right: 39px;
+  cursor: help;
+}
+
+div[ac-boxfill] input[type="checkbox"]:checked + label {
+  color: #428BCA;
+}
+
+div[ac-boxfill] input[type="checkbox"]:checked + label::before {
+  opacity: 0.8;
+}
+
+div[ac-boxfill] svg {
+  width: 17px;
+  height: 17px;
+  margin-top: 2px;
+  margin-left: -19px;
+  pointer-events: none;
+  float: left;
+}
+
+div[ac-boxfill] svg path {
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  fill: none;
+}
+
+div[ac-boxfill] svg path#add {
+  stroke-width: 11px;
+  stroke: #428BCA;
+  z-index: 3 !important;
+}
+
+div[ac-boxfill] svg path#remove {
+  stroke-width: 19px;
+  stroke: #FFFFFF;
+  z-index: 1 !important;
+}
+
+.logo-big {
+  background-image: url('../img/logo-big.png');
+  background-size: 300px 217px;
+  width: 300px;
+  height: 217px;
+  margin-left: calc(50% - 150px);
+}
+
+.right {
+  text-align: right;
+}
+
+.right-inner-addon {
+  position: relative;
+}
+
+.right-inner-addon input {
+  padding-right: 30px;    
+}
+
+.right-inner-addon span {
+  position: absolute;
+  right: 0px;
+  padding: 10px 12px;
+  pointer-events: none;
+}
