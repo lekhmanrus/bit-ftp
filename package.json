@@ -1,7 +1,46 @@
 {
-  "name": "",
+  "name": "bit-ftp",
+  "description": "BitFTP is user-friendly, easy configurable, open-source FTP Server for multiple platforms.",
   "version": "0.0.1",
-  "description": "",
+  "homepage": "https://github.com/lekhmanrus/bit-ftp",
+  "author": {
+    "name": "Ruslan Lekhman",
+    "email": "lekhman-ruslan@i.ua"
+  },
+  "contributors": [
+    {
+      "name": "Ruslan Lekhman",
+      "email": "lekhman-ruslan@i.ua"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lekhmanrus/bit-ftp.git"
+  },
+  "bugs": {
+    "url": "https://github.com/lekhmanrus/bit-ftp/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/denzp/symath-application/blob/master/LICENSE"
+    }
+  ],
+  "window": {
+    "title": "BitFTP",
+    "icon": "assets/img/logo.png",
+
+    "frame": true,
+    "min_width": 900,
+    "min_height": 370,
+    "width": 900,
+    "height": 657,
+    "position": "center"
+  },
+  "main": "assets/index.html",
+  "engines": {
+    "node": ">= 0.8.0"
+  },
   "dependencies": {
 
   },
@@ -14,26 +53,5 @@
     "npm": "*",
     "async": "*",
     "download": "*"
-  },
-  "repository": {
-
-  },
-  "window": {
-    "title": "BitFTP",
-    "icon": "assets/img/logo.png",
-
-    "frame": true,
-    "min_width": 900,
-    "min_height": 370,
-    "width": 900,
-    "height": 657,
-    "position": "center"
-  },
-  "author": "",
-  "license": "MIT",
-  "bugs": {
-    "url": ""
-  },
-  "homepage": "",
-  "main": "assets/index.html"
+  }
 }

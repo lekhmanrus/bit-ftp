@@ -1,0 +1,26 @@
+# Logs
+logs
+*.log
+
+# Runtime data
+pids
+*.pid
+*.seed
+
+
+# Compiled binary addons (http://nodejs.org/api/addons.html)
+node_modules/ftpd/build/Release
+node_modules/ftpd/build/Debug
+
+# Dependency directory
+# Deployed apps should consider commenting this line out:
+# see https://npmjs.org/doc/faq.html#Should-I-check-my-node_modules-folder-into-git
+node_modules
+!node_modules/ftpd
+
+# Others
+*.csv
+*.dat
+*.out
+*.gz
+*.db
