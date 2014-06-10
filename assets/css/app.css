@@ -277,3 +277,15 @@ div[ac-boxfill] svg path#remove {
   padding: 5px;
   border-top: 0px;
 }
+
+.clients-online {
+  position: absolute;
+  right: 0px;
+  font-size: 9px;
+  padding: 2px 4px;
+}
+
+.badge-success {
+  color: #FFFFFF;
+  background-color: #5CB85C;
+}

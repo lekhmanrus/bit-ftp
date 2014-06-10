@@ -24,3 +24,6 @@ node_modules
 *.out
 *.gz
 *.db
+
+# Personal config
+configuration.json

@@ -55,7 +55,7 @@ angular.module('bitFTPApp.services', [])
 
 .value('log', [ ])
 
-.service('users', ['$modal', 'ftpd', function($modal, ftpd) {
+.service('users', ['$modal', 'ftpd', 'configurationManager', function($modal, ftpd, cm) {
 
   var ftpd = require('ftpd');
 
@@ -95,6 +95,8 @@ angular.module('bitFTPApp.services', [])
     this.getUsers();
     if(this.editUserId == id)
       this.setEditUserId();
+    cm.setUsers(this.users);
+    cm.saveConfiguration();
     return true;
   };
 
@@ -108,6 +110,8 @@ angular.module('bitFTPApp.services', [])
     }
     this.getUsers();
     this.setEditUserId(this.users[this.users.length - 1].id);
+    cm.setUsers(this.users);
+    cm.saveConfiguration();
     return true;
   };
 
@@ -124,6 +128,8 @@ angular.module('bitFTPApp.services', [])
       $modal({ title: err.name, content: err.message, show: true });
     }
     this.getUsers();
+    cm.setUsers(this.users);
+    cm.saveConfiguration();
     return true;
   };
 
@@ -164,7 +170,7 @@ angular.module('bitFTPApp.services', [])
 
 }])
 
-.service('options', ['$modal', 'ftpd', function($modal, ftpd) {
+.service('options', ['$modal', 'ftpd', 'configurationManager', function($modal, ftpd, cm) {
 
   this.options = { };
 
@@ -185,7 +191,74 @@ angular.module('bitFTPApp.services', [])
     catch(err) {
       $modal({ title: err.name, content: err.message, show: true });
     }
-    return this.getOptions();
+    this.getOptions();
+    cm.setOptions(this.options);
+    cm.saveConfiguration();
+    return this.options;
+  };
+
+}])
+
+.service('configurationManager', ['$modal', 'ftpd', function($modal, ftpd) {
+
+  var fs   = require('fs'),
+      path = './configuration.json';
+
+  this.configuration = { };
+
+  this.setUsers = function(u) {
+    this.configuration.users = angular.copy(u);
+  };
+
+  this.setOptions = function(o) {
+    var u = [ ];
+    if(this.configuration.users)
+      u = this.configuration.users;
+    this.configuration = o;
+    this.setUsers(u);
+  };
+
+  this.saveConfiguration = function() {
+    try {
+      fs.writeFile(path, JSON.stringify(this.configuration, null, 2), function(err) {
+        if(err)
+          $modal({ title: err.name, content: err.message, show: true });
+      });
+    }
+    catch(err) {
+      $modal({ title: err.name, content: err.message, show: true });
+    }
+  };
+
+  this.loadConfiguration = function(cb) {
+    var self = this;
+    try {
+      if(fs.existsSync(path)) {
+        fs.readFile(path, 'utf-8', function(err, contents) {
+          if(err)
+            $modal({ title: err.name, content: err.message, show: true });
+          self.configuration = JSON.parse(contents);
+          var c = self.configuration;
+          if(c.dataPortRangeFrom !== undefined &&
+             c.dataPortRangeTo !== undefined &&
+             c.noLoginTimeout !== undefined &&
+             c.noTransferTimeout !== undefined &&
+             c.checkPassDelay !== undefined &&
+             c.maxPasswordTries !== undefined &&
+             c.listenPort !== undefined
+            )
+            ftpd.setOptions(c.dataPortRangeFrom, c.dataPortRangeTo, c.noLoginTimeout, c.noTransferTimeout, c.checkPassDelay, c.maxPasswordTries, c.listenPort);
+          for(var i in c.users)
+            ftpd.addUser(c.users[i].login, c.users[i].password, c.users[i].startDirectory, c.users[i].privileges, c.users[i].maxClient);
+          cb();
+        });
+      }
+      else
+        cb();
+    }
+    catch(err) {
+      $modal({ title: err.name, content: err.message, show: true });
+    }
   };
 
 }]);

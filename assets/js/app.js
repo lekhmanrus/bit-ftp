@@ -28,6 +28,10 @@ angular
 
 }])
 
-.run(['server', function(server) {
-  server.writeLog();
+.run(['server', 'configurationManager', function(server, cm) {
+
+  cm.loadConfiguration(function() {
+    server.writeLog();
+  });
+
 }]);
