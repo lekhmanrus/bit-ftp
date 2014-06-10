@@ -204,12 +204,32 @@ angular.module('bitFTPApp.controllers', [])
 
 }])
 
-.controller('OptionsCtrl', ['$scope', function($scope) {
+.controller('OptionsCtrl', ['$scope', 'options', function($scope, options) {
 
-  $scope.options = { dataPortRange: { from: 100, to: 999 } };
+  var refreshOptions = function() {
+    var o = options.getOptions();
+    $scope.options = {
+      dataPortRange: { from: o.dataPortRangeFrom, to: o.dataPortRangeTo },
+      noLoginTimeout: o.noLoginTimeout,
+      noTransferTimeout: o.noTransferTimeout,
+      checkPassDelay: o.checkPassDelay,
+      maxPasswordTries: o.maxPasswordTries,
+      listenPort: o.listenPort
+    };
+  };
+
+  refreshOptions();
 
   $scope.saveOptions = function() {
-    alert(1);
+    options.setOptions(
+      $scope.options.dataPortRange.from,
+      $scope.options.dataPortRange.to,
+      $scope.options.noLoginTimeout,
+      $scope.options.noTransferTimeout,
+      $scope.options.checkPassDelay,
+      $scope.options.maxPasswordTries,
+      $scope.options.listenPort
+      );
   };
 
 }]);

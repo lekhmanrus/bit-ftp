@@ -162,4 +162,30 @@ angular.module('bitFTPApp.services', [])
     return true;
   };
 
+}])
+
+.service('options', ['$modal', 'ftpd', function($modal, ftpd) {
+
+  this.options = { };
+
+  this.getOptions = function() {
+    try {
+      this.options = ftpd.getOptions();
+    }
+    catch(err) {
+      $modal({ title: err.name, content: err.message, show: true });
+    }
+    return this.options;
+  };
+
+  this.setOptions = function(dataPortRangeFrom, dataPortRangeTo, noLoginTimeout, noTransferTimeout, checkPassDelay, maxPasswordTries, listenPort) {
+    try {
+      ftpd.setOptions(dataPortRangeFrom, dataPortRangeTo, noLoginTimeout, noTransferTimeout, checkPassDelay, maxPasswordTries, listenPort);
+    }
+    catch(err) {
+      $modal({ title: err.name, content: err.message, show: true });
+    }
+    return this.getOptions();
+  };
+
 }]);

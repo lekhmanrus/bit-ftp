@@ -3,17 +3,31 @@
   <colgroup>
     <col width="139px" />
     <col />
+    <col width="11px" />
+    <col width="139px" />
+    <col />
   </colgroup>
   <tbody>
     <tr>
+      <td>Listen port</td>
+      <td colspan="4">
+        <input id="listenPort" ng-model="options.listenPort" type="number" class="form-control" placeholder="Input listen port" uint />
+        <p class="help-block pull-right">The FTP control port</p>
+      </td>
+    </tr>
+    <tr>
       <td>Data port range</td>
-      <td>
+      <td colspan="4">
         <div class="input-group">
           <span class="input-group-addon">From</span>
           <input ng-model="options.dataPortRange.from" type="text" class="form-control" placeholder="Data port range from" />
           <span class="input-group-addon">To</span>
           <input ng-model="options.dataPortRange.to" type="text" class="form-control" placeholder="Data port range to" />
         </div>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="5">
         <div id="dataPortRange" range-slider min="0" max="65535" model-min="options.dataPortRange.from" model-max="options.dataPortRange.to"></div>
         <p class="help-block pull-right">Data TCP-Port range BitFTP can use to send and receive files or data</p>
       </td>
@@ -25,17 +39,16 @@
           <input id="noLoginTimeout" ng-model="options.noLoginTimeout" type="text" class="form-control" placeholder="Input no login timeout" uint />
           <span class="input-group-addon">seconds</span>
         </div>
-        <p class="help-block pull-right">The time in which a user has to login</p>
+        <p class="help-block pull-right">The time in which a user has to login (0 - no timeout)</p>
       </td>
-    </tr>
-    <tr>
+      <td></td>
       <td>No transfer timeout</td>
       <td>
         <div class="input-group">
           <input id="noTransferTimeout" ng-model="options.noTransferTimeout" type="text" class="form-control" placeholder="Input no transfer timeout" uint />
           <span class="input-group-addon">seconds</span>
         </div>
-        <p class="help-block pull-right">The no transfer (list, download or upload) timeout</p>
+        <p class="help-block pull-right">The no transfer (list, download or upload) timeout (0 - no timeout)</p>
       </td>
     </tr>
     <tr>
@@ -45,10 +58,9 @@
           <input id="checkPassDelay" ng-model="options.checkPassDelay" type="text" class="form-control" placeholder="Input check password delay" uint />
           <span class="input-group-addon">milliseconds</span>
         </div>
-        <p class="help-block pull-right">The delay the Server will wait when checking for the Client's pass (bruteforcing protection)</p>
+        <p class="help-block pull-right">The delay the Server will wait when checking for the Client's pass (bruteforcing protection / 0 - no pass delay)</p>
       </td>
-    </tr>
-    <tr>
+      <td></td>
       <td>Max password tries</td>
       <td>
         <input id="maxPasswordTries" ng-model="options.maxPasswordTries" type="number" class="form-control" placeholder="Input max password tries" uint />
