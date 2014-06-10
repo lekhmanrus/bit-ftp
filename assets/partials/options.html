@@ -1,1 +1,66 @@
-<p>Options there</p>
+<h4 class="page-header users-header">Options</h4>
+<table class="table my-table">
+  <colgroup>
+    <col width="139px" />
+    <col />
+  </colgroup>
+  <tbody>
+    <tr>
+      <td>Data port range</td>
+      <td>
+        <div class="input-group">
+          <span class="input-group-addon">From</span>
+          <input ng-model="options.dataPortRange.from" type="text" class="form-control" placeholder="Data port range from" />
+          <span class="input-group-addon">To</span>
+          <input ng-model="options.dataPortRange.to" type="text" class="form-control" placeholder="Data port range to" />
+        </div>
+        <div id="dataPortRange" range-slider min="0" max="65535" model-min="options.dataPortRange.from" model-max="options.dataPortRange.to"></div>
+        <p class="help-block pull-right">Data TCP-Port range BitFTP can use to send and receive files or data</p>
+      </td>
+    </tr>
+    <tr>
+      <td>No login timeout</td>
+      <td>
+        <div class="input-group">
+          <input id="noLoginTimeout" ng-model="options.noLoginTimeout" type="text" class="form-control" placeholder="Input no login timeout" uint />
+          <span class="input-group-addon">seconds</span>
+        </div>
+        <p class="help-block pull-right">The time in which a user has to login</p>
+      </td>
+    </tr>
+    <tr>
+      <td>No transfer timeout</td>
+      <td>
+        <div class="input-group">
+          <input id="noTransferTimeout" ng-model="options.noTransferTimeout" type="text" class="form-control" placeholder="Input no transfer timeout" uint />
+          <span class="input-group-addon">seconds</span>
+        </div>
+        <p class="help-block pull-right">The no transfer (list, download or upload) timeout</p>
+      </td>
+    </tr>
+    <tr>
+      <td>Check password delay</td>
+      <td>
+        <div class="input-group">
+          <input id="checkPassDelay" ng-model="options.checkPassDelay" type="text" class="form-control" placeholder="Input check password delay" uint />
+          <span class="input-group-addon">milliseconds</span>
+        </div>
+        <p class="help-block pull-right">The delay the Server will wait when checking for the Client's pass (bruteforcing protection)</p>
+      </td>
+    </tr>
+    <tr>
+      <td>Max password tries</td>
+      <td>
+        <input id="maxPasswordTries" ng-model="options.maxPasswordTries" type="number" class="form-control" placeholder="Input max password tries" uint />
+        <p class="help-block pull-right">The max allowed password tries per client. After that, the client is disconnected</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<button type="submit" class="btn btn-lg btn-primary btn-block" ng-click="saveOptions()">
+  <span class="glyphicon glyphicon-floppy-disk"></span>
+  Save
+</button>

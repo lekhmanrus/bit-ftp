@@ -6,7 +6,7 @@ angular.module('bitFTPApp.controllers', [])
 
   $scope.running = server.isRunning();
   $scope.page = null;
-  
+
   $scope.$on('$routeChangeSuccess', function() {
     $scope.page = $location.path();
   });
@@ -205,5 +205,11 @@ angular.module('bitFTPApp.controllers', [])
 }])
 
 .controller('OptionsCtrl', ['$scope', function($scope) {
+
+  $scope.options = { dataPortRange: { from: 100, to: 999 } };
+
+  $scope.saveOptions = function() {
+    alert(1);
+  };
 
 }]);

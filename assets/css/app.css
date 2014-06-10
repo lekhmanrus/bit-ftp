@@ -259,3 +259,21 @@ div[ac-boxfill] svg path#remove {
   padding: 10px 12px;
   pointer-events: none;
 }
+
+.input-group .form-control {
+  z-index: 0;
+}
+
+.my-label {
+  margin-top: 5px;
+}
+
+.table.my-table>thead>tr>th,
+.table.my-table>tbody>tr>th,
+.table.my-table>tfoot>tr>th,
+.table.my-table>thead>tr>td,
+.table.my-table>tbody>tr>td,
+.table.my-table>tfoot>tr>td {
+  padding: 5px;
+  border-top: 0px;
+}

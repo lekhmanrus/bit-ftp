@@ -9,7 +9,8 @@ angular
   'bitFTPApp.directives',
   'bitFTPApp.controllers',
   'ngAnimate',
-  'mgcrea.ngStrap'
+  'mgcrea.ngStrap',
+  'ui-rangeSlider'
 ])
 
 .config(['$routeProvider', '$modalProvider', function($routeProvider, $modalProvider) {
