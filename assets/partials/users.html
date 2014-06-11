@@ -4,7 +4,7 @@
       Add new user
       <span class="glyphicon glyphicon-plus"></span>
     </button>
-    <h4 class="page-header users-header">Users</h4>
+    <h4 class="page-header users-header">Users <span ng-show="usersCount">({{ usersCount }})</span></h4>
     <div class="panel panel-default" ng-if="users.length <= 0">
       <div class="panel-body">
         No users yet.

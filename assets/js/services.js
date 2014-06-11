@@ -51,6 +51,14 @@ angular.module('bitFTPApp.services', [])
     });
   };
 
+  this.getClientsOnlineCount = function() {
+    return ftpd.getClientsOnlineCount();
+  };
+
+  this.getUsersOnlineCount = function() {
+    return ftpd.getUsersOnlineCount();
+  };
+
 }])
 
 .value('log', [ ])
@@ -61,6 +69,10 @@ angular.module('bitFTPApp.services', [])
 
   this.users = [];
   this.editUserId = undefined;
+
+  this.getUsersCount = function() {
+    return ftpd.getUsersCount();
+  };
 
   this.getUsers = function() {
     try {
@@ -237,19 +249,21 @@ angular.module('bitFTPApp.services', [])
         fs.readFile(path, 'utf-8', function(err, contents) {
           if(err)
             $modal({ title: err.name, content: err.message, show: true });
-          self.configuration = JSON.parse(contents);
-          var c = self.configuration;
-          if(c.dataPortRangeFrom !== undefined &&
-             c.dataPortRangeTo !== undefined &&
-             c.noLoginTimeout !== undefined &&
-             c.noTransferTimeout !== undefined &&
-             c.checkPassDelay !== undefined &&
-             c.maxPasswordTries !== undefined &&
-             c.listenPort !== undefined
-            )
-            ftpd.setOptions(c.dataPortRangeFrom, c.dataPortRangeTo, c.noLoginTimeout, c.noTransferTimeout, c.checkPassDelay, c.maxPasswordTries, c.listenPort);
-          for(var i in c.users)
-            ftpd.addUser(c.users[i].login, c.users[i].password, c.users[i].startDirectory, c.users[i].privileges, c.users[i].maxClient);
+          if(contents) {
+            self.configuration = JSON.parse(contents);
+            var c = self.configuration;
+            if(c.dataPortRangeFrom !== undefined &&
+               c.dataPortRangeTo !== undefined &&
+               c.noLoginTimeout !== undefined &&
+               c.noTransferTimeout !== undefined &&
+               c.checkPassDelay !== undefined &&
+               c.maxPasswordTries !== undefined &&
+               c.listenPort !== undefined
+              )
+              ftpd.setOptions(c.dataPortRangeFrom, c.dataPortRangeTo, c.noLoginTimeout, c.noTransferTimeout, c.checkPassDelay, c.maxPasswordTries, c.listenPort);
+            for(var i in c.users)
+              ftpd.addUser(c.users[i].login, c.users[i].password, c.users[i].startDirectory, c.users[i].privileges, c.users[i].maxClient);
+          }
           cb();
         });
       }
@@ -261,4 +275,6 @@ angular.module('bitFTPApp.services', [])
     }
   };
 
-}]);
+}])
+
+.value('loading', { status: true });

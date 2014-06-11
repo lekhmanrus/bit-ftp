@@ -29,12 +29,12 @@
   "window": {
     "title": "BitFTP",
     "icon": "assets/img/logo.png",
-
+    "toolbar": false,
     "frame": true,
     "min_width": 900,
-    "min_height": 370,
+    "min_height": 580,
     "width": 900,
-    "height": 657,
+    "height": 580,
     "position": "center"
   },
   "main": "assets/index.html",

@@ -2,7 +2,7 @@
 
 angular.module('bitFTPApp.controllers', [])
 
-.controller('MainCtrl', ['$scope', '$location', '$route', '$modal', 'server', function($scope, $location, $route, $modal, server) {
+.controller('MainCtrl', ['$scope', '$location', '$route', '$modal', '$timeout', 'server', 'loading', function($scope, $location, $route, $modal, $timeout, server, loading) {
 
   $scope.running = server.isRunning();
   $scope.page = null;
@@ -17,11 +17,59 @@ angular.module('bitFTPApp.controllers', [])
 
   $scope.stop = function() {
     $scope.running = server.stop();
+    $scope.clientsOnlineCount = 0;
+    $timeout(angular.noop);
   };
 
   $scope.showModalAbout = function() {
     $modal({template: 'partials/modal/about.html', show: true});
   };
+
+  var clientsOnlineCountRefresh = function() {
+    $timeout(function() {
+      $scope.clientsOnlineCount = server.getClientsOnlineCount();
+      $scope.loading = loading.status;
+      clientsOnlineCountRefresh();
+    }, 10);
+  };
+
+  clientsOnlineCountRefresh();
+
+  Mousetrap.bind(['ctrl+r', 'enter', 'f5'], function() {
+    $scope.start();
+    $timeout(angular.noop);
+    return false;
+  });
+
+  Mousetrap.bind(['ctrl+s', 'space', 'f6'], function() {
+    $scope.stop();
+    $timeout(angular.noop);
+    return false;
+  });
+
+  Mousetrap.bind(['ctrl+l'], function() {
+    $location.path('/log');
+    $timeout(angular.noop);
+    return false;
+  });
+
+  Mousetrap.bind(['ctrl+u'], function() {
+    $location.path('/users');
+    $timeout(angular.noop);
+    return false;
+  });
+
+  Mousetrap.bind(['ctrl+o'], function() {
+    $location.path('/options');
+    $timeout(angular.noop);
+    return false;
+  });
+
+  Mousetrap.bind(['ctrl+a', 'f1'], function() {
+    $scope.showModalAbout();
+    $timeout(angular.noop);
+    return false;
+  });
 
 }])
 
@@ -58,6 +106,7 @@ angular.module('bitFTPApp.controllers', [])
     };
   };
 
+  $scope.usersCount = users.getUsersCount();
 
   $scope.getUser = function(id) {
     if(id === undefined)
@@ -117,6 +166,7 @@ angular.module('bitFTPApp.controllers', [])
     }
     else
       $modal({ title: 'Error', content: 'Error removing a user', show: true });
+    $scope.usersCount = users.getUsersCount();
   };
 
   $scope.showModalRemoveUser = function(id) {
@@ -169,6 +219,7 @@ angular.module('bitFTPApp.controllers', [])
     }
     else
       $scope.editUserId = undefined;
+    $scope.usersCount = users.getUsersCount();
   };
 
   $scope.editUser = function() {
@@ -197,6 +248,7 @@ angular.module('bitFTPApp.controllers', [])
       privileges += 'x';
     if(users.editUser($scope.editUserId, $scope.editingUser.login, $scope.editingUser.password, $scope.editingUser.startDirectory, privileges, $scope.editingUser.maxNumberOfClients)) {
       $scope.users = users.users;
+      $modal({title: 'Success', content: 'User "' + $scope.editingUser.login + '" was successfully changed.', show: true});
     }
     else
       $modal({title: 'Editing a user', content: 'Error! Something went wrong.', show: true});

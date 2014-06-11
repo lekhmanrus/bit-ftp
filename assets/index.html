@@ -12,9 +12,17 @@
   <link rel="stylesheet" type="text/css" href="css/hint.min.css" />
   <link rel="stylesheet" type="text/css" href="css/angular-motion.min.css" />
   <link rel="stylesheet" type="text/css" href="css/angular.rangeSlider.css" />
+  <link rel="stylesheet" type="text/css" href="css/animate.min.css" />
+  <link rel="stylesheet" type="text/css" href="css/kLgiH.css" />
   <link rel="stylesheet" type="text/css" href="css/app.css" />
 </head>
 <body ng-controller="MainCtrl">
+  <div class="loader" ng-if="loading">
+    <div class="wm-loader in">
+      <b></b>
+      <i></i>
+    </div>
+  </div>
   <menu class="left">
     <li><span></span></li>
     <li class="green" ng-class="{ 'disable': running }" ng-click="start()">
@@ -23,7 +31,7 @@
       </a>
     </li>
     <li class="red" ng-class="{ 'disable': !running }" ng-click="stop()">
-      <a href="" ng-class="{ 'hint--right hint--bounce': running }" ng-data-hint="{ 'Save (Ctrl+S / Space / F6)' : running }">
+      <a href="" ng-class="{ 'hint--right hint--bounce': running }" ng-data-hint="{ 'Stop (Ctrl+S / Space / F6)' : running }">
         <span class="glyphicon glyphicon-stop"></span>
       </a>
     </li>
@@ -35,7 +43,7 @@
     <li ng-class="{ 'active': page == '/users' }">
       <a href="#/users" class="hint--right hint--bounce" data-hint="Users (Ctrl+U)">
         <span class="glyphicon glyphicon-user"></span>
-        <span class="badge badge-success pull-right clients-online">42</span>
+        <span class="badge badge-success pull-right clients-online" ng-show="clientsOnlineCount" ng-bind="clientsOnlineCount"></span>
       </a>
     </li>
     <li ng-class="{ 'active': page == '/options' }">
@@ -59,6 +67,7 @@
   <script type="text/javascript" src="lib/angular-strap.min.js"></script>
   <script type="text/javascript" src="lib/angular-strap.tpl.min.js"></script>
   <script type="text/javascript" src="lib/angular.rangeSlider.js"></script>
+  <script type="text/javascript" src="lib/mousetrap.min.js"></script>
   <script type="text/javascript" src="js/app.js"></script>
   <script type="text/javascript" src="js/services.js"></script>
   <script type="text/javascript" src="js/controllers.js"></script>
