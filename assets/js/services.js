@@ -214,7 +214,9 @@ angular.module('bitFTPApp.services', [])
 .service('configurationManager', ['$modal', 'ftpd', function($modal, ftpd) {
 
   var fs   = require('fs'),
-      path = './configuration.json';
+      //path = './configuration.json';
+      rpath = require('path'),
+      path = rpath.dirname( process.execPath ) + ((process.platform === "win32") ? '\\' : '/') + 'configuration.json';
 
   this.configuration = { };
 
